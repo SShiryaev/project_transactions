@@ -24,3 +24,11 @@ def recent_transactions(transactions_list, len_list):
     sort_transactions_list = sorted(transactions_list, key=lambda x: x['date'], reverse=True)
     recent_transactions_list = sort_transactions_list[0:len_list]
     return recent_transactions_list
+
+
+def recent_format_transactions(transactions, len_list):
+    """Функция объединяющая функции format_transactions и recent_transactions,
+    для более короткого вызова в main.py"""
+    format_transactions_list = format_transactions(transactions)
+    recent_transactions_list = recent_transactions(format_transactions_list, len_list)
+    return recent_transactions_list
