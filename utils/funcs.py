@@ -4,7 +4,7 @@ import os
 
 def load_transactions():
     """Фукнция чтения json файла"""
-    with open(os.path.join('..', 'data', 'operations.json')) as file:
+    with open(os.path.join('data', 'operations.json')) as file:
         transactions_list = json.load(file)
         return transactions_list
 
@@ -62,3 +62,17 @@ def correct_bank_account(from_or_to):
     list_from_or_to[-1] = valid_bank_account
     valid_bank_account_from_or_to = ' '.join(list_from_or_to)
     return valid_bank_account_from_or_to
+
+
+def user_form_transactions(transactions):
+    for transaction in transactions:
+        valid_date = correct_date(transaction['date'])
+        discription = transaction['description']
+        if 'Счет' in transaction['from']:
+            from_where = correct_bank_account(transaction['from'])
+        else:
+            from_where = correct_card_number(transaction['from'])
+        to_where = correct_bank_account(transaction['to'])
+        amount = transaction['operationAmount']['amount']
+        currency = transaction['operationAmount']['currency']['name']
+        print(f'\n{valid_date} {discription}\n{from_where} -> {to_where}\n{amount} {currency}')
