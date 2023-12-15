@@ -34,9 +34,21 @@ def recent_format_transactions(transactions, len_list):
     return recent_transactions_list
 
 
-def get_correct_date(transaction):
+def correct_date(transaction):
     """Функция возвращающая дату из словаря в корректном формате"""
     num = list(transaction['date'])
     valid_num = num[8], num[9], num[7], num[5], num[6], num[4], num[0], num[1], num[2], num[3]
     valid_date = ''.join(valid_num)
     return valid_date
+
+
+def correct_number_card(transaction):
+    """Функция возвращает замаскированный и разбитый по 4 символа номер карты"""
+    from_where = transaction['from']
+    list_from_where = from_where.split()
+    card_number = list_from_where[-1]
+    valid_card_number = card_number[:4] + ' ' + card_number[4:6] + '** **** ' + card_number[12:]
+    list_from_where[-1] = valid_card_number
+    valid_from = ' '.join(list_from_where)
+    return valid_from
+
