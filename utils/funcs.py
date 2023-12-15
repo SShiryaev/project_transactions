@@ -34,21 +34,31 @@ def recent_format_transactions(transactions, len_list):
     return recent_transactions_list
 
 
-def correct_date(transaction):
+def correct_date(date):
     """Функция возвращающая дату из словаря в корректном формате"""
-    num = list(transaction['date'])
-    valid_num = num[8], num[9], num[7], num[5], num[6], num[4], num[0], num[1], num[2], num[3]
+    list_date = list(date)
+    valid_num = (list_date[8], list_date[9], list_date[7], list_date[5], list_date[6],
+                 list_date[4], list_date[0], list_date[1], list_date[2], list_date[3])
     valid_date = ''.join(valid_num)
     return valid_date
 
 
-def correct_number_card(transaction):
+def correct_card_number(from_or_to):
     """Функция возвращает замаскированный и разбитый по 4 символа номер карты"""
-    from_where = transaction['from']
-    list_from_where = from_where.split()
+    list_from_where = from_or_to.split()
     card_number = list_from_where[-1]
     valid_card_number = card_number[:4] + ' ' + card_number[4:6] + '** **** ' + card_number[12:]
     list_from_where[-1] = valid_card_number
-    valid_from = ' '.join(list_from_where)
-    return valid_from
+    valid_card_number_from_or_to = ' '.join(list_from_where)
+    return valid_card_number_from_or_to
 
+
+def correct_bank_account(from_or_to):
+    """Функция возвращает замаскированный и не отображающийся целиком
+    номер счета"""
+    list_from_or_to = from_or_to.split()
+    bank_account = list_from_or_to[-1]
+    valid_bank_account = '**' + bank_account[16:]
+    list_from_or_to[-1] = valid_bank_account
+    valid_bank_account_from_or_to = ' '.join(list_from_or_to)
+    return valid_bank_account_from_or_to
