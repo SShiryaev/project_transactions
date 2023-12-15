@@ -32,3 +32,11 @@ def recent_format_transactions(transactions, len_list):
     format_transactions_list = format_transactions(transactions)
     recent_transactions_list = recent_transactions(format_transactions_list, len_list)
     return recent_transactions_list
+
+
+def get_correct_date(transaction):
+    """Функция возвращающая дату из словаря в корректном формате"""
+    num = list(transaction['date'])
+    valid_num = num[8], num[9], num[7], num[5], num[6], num[4], num[0], num[1], num[2], num[3]
+    valid_date = ''.join(valid_num)
+    return valid_date
