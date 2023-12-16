@@ -17,8 +17,8 @@ def test_recent_format_transactions(fixture_valid_array_format, fixture_valid_ar
 
 
 def test_correct_date():
-    assert correct_date('2019-12-07') == '07-12-2019'
-    assert correct_date('2015-03-25') == '25-03-2015'
+    assert correct_date('2019-12-07') == '07.12.2019'
+    assert correct_date('2015-03-25') == '25.03.2015'
 
 
 def test_correct_card_number():
