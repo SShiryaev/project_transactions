@@ -4,7 +4,7 @@ import os
 
 def load_transactions():
     """Фукнция чтения json файла"""
-    with open(os.path.join('data', 'operations.json')) as file:
+    with open(os.path.join('data', 'operations.json', encoding='utf-8')) as file:
         transactions_list = json.load(file)
         return transactions_list
 
